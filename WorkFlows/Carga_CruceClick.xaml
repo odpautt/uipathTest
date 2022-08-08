@@ -1,0 +1,172 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Carga_CruceClick" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_CantidadRegistros" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_ExcelCarga" Type="InArgument(x:String)" />
+    <x:Property Name="in_NombreHoja" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1504,1626</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Carga_CruceClick_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="28">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Carga_CruceClick" sap:VirtualizedContainerService.HintSize="396,1561" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="vstrLimiteFilas" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="354,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[INICIA Formulas Cruce-Click Cantidad de REsistros ]&quot; + in_CantidadRegistros.ToString]" />
+    <Assign sap:VirtualizedContainerService.HintSize="354,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[vstrLimiteFilas]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[(in_CantidadRegistros+1).ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Formula  A" DisplayName="Formula A" sap:VirtualizedContainerService.HintSize="354,143" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["A"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">A2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">A2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Formula B" DisplayName="Formula B" sap:VirtualizedContainerService.HintSize="354,143" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["B"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">B2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">B2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Aplicar-Formula workflow Formula C" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["C"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">C2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">C2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Aplicar-Formula workflow Formula D" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["D"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">D2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">D2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Aplicar-Formula workflow Formula E" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["E"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">E2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">E2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Aplicar-Formula workflow Formula F" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["F"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">F2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">F2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Aplicar-Formula workflow G " sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["G"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">G2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">G2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Aplicar-Formula workflow h" sap:VirtualizedContainerService.HintSize="354,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="WorkFlows\General_Excel\Apply_Formula.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_PathExcel">[in_ExcelCarga]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_NombreHoja]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFinal">["H"+vstrLimiteFilas]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CellFormula">H2</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Cellinicial">H2</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>

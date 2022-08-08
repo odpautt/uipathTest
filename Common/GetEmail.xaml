@@ -1,0 +1,288 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="EnvioCorreos" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_IdCorreo" Type="InArgument(x:String)" />
+    <x:Property Name="in_EmailConfig" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="out_flagNoExistid" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="out_DtbEmailConfig" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_strObservaciones" Type="OutArgument(x:String)" />
+    <x:Property Name="in_IDOferta" Type="InArgument(x:String)" />
+    <x:Property Name="in_Observa" Type="InArgument(x:String)" />
+    <x:Property Name="in_Detalle" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1310,2103</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>EnvioCorreos_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="64">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="60">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Recibe el código de Error y retorna la información asociada a ese Código en la Hoja Email del archivo Config.xls" DisplayName="Get Configuracion Email" sap:VirtualizedContainerService.HintSize="1255,2038" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="vDtbEmailConfig" />
+      <Variable x:TypeArguments="x:String" Name="vStrSubject" />
+      <Variable x:TypeArguments="x:String" Name="vStrBody" />
+      <Variable x:TypeArguments="x:String" Name="vStrBodyHtml" />
+      <Variable x:TypeArguments="ss:SecureString" Name="vPassword" />
+      <Variable x:TypeArguments="x:String" Name="vstrUSername" />
+      <Variable x:TypeArguments="x:String" Name="vstrPassword" />
+      <Variable x:TypeArguments="x:Boolean" Name="vflagErrorCorreo" />
+      <Variable x:TypeArguments="sd:DataTable" Name="vdtFiltro" />
+      <Variable x:TypeArguments="x:String" Name="variable1" />
+      <Variable x:TypeArguments="x:Boolean" Name="vflagNoExistid" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1213,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Inicio Lectura Configuración Email&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1213,479" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+            <Assign.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[out_DtbEmailConfig]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[in_EmailConfig.Select("ID='"+in_IdCorreo+"'").CopyToDataTable]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_32">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Boolean">[out_flagNoExistid]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;No existe El Código en el Excel de configuración &quot; +in_IdCorreo]" />
+              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_33">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[out_flagNoExistid]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <If Condition="[out_flagNoExistid]" DisplayName="If  Existe el Codigo de Notificación" sap:VirtualizedContainerService.HintSize="1213,1265" sap2010:WorkflowViewState.IdRef="If_12">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Else>
+        <If Condition="[out_DtbEmailConfig.Rows(0).Item(&quot;Email&quot;).ToString.Equals(&quot;1&quot;)]" DisplayName="If tiene activo el envío de correo" sap:VirtualizedContainerService.HintSize="1068,1117" sap2010:WorkflowViewState.IdRef="If_16">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence sap:VirtualizedContainerService.HintSize="689,969" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Asignar Body" sap:VirtualizedContainerService.HintSize="647,60" sap2010:WorkflowViewState.IdRef="Assign_35">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[vStrBody]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[out_DtbEmailConfig.Rows(0).Item("Body").ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="647,377" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                <ui:CommentOut.Body>
+                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="611,299" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If Condition="[in_Observa.equals(&quot;&quot;)]" sap:VirtualizedContainerService.HintSize="569,207" sap2010:WorkflowViewState.IdRef="If_15">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_34">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[vStrBody]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[out_DtbEmailConfig.Rows(0).Item("Body").ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Then>
+                      <If.Else>
+                        <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_28">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[vStrBody]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[in_Observa]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ui:CommentOut.Body>
+              </ui:CommentOut>
+              <Assign sap:VirtualizedContainerService.HintSize="647,60" sap2010:WorkflowViewState.IdRef="Assign_31">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[vStrBody]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[vStrBody.Replace("_DETALLE_",in_Detalle)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="647,60" sap2010:WorkflowViewState.IdRef="Assign_29">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[out_strObservaciones]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[vStrBody]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="647,60" sap2010:WorkflowViewState.IdRef="Assign_24">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[vStrBodyHtml]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;html xmlns=""http://www.w3.org/1999/xhtml"" xmlns:o=""urn:schemas-microsoft-com:office:office"" style=""width:100%;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0""&gt;&lt;head&gt;   &lt;meta charset=""UTF-8""&gt;   &lt;meta content=""width=device-width, initial-scale=1"" name=""viewport""&gt;   &lt;meta name=""x-apple-disable-message-reformatting""&gt;   &lt;meta http-equiv=""X-UA-Compatible"" content=""IE=edge""&gt;   &lt;meta content=""telephone=no"" name=""format-detection""&gt;   &lt;title&gt;Nuevo correo electrónico&lt;/title&gt;   &lt;!--[if (mso 16)]&gt;     &lt;style type=""text/css""&gt;     a {text-decoration: none;}     &lt;/style&gt;     &lt;![endif]--&gt;   &lt;!--[if gte mso 9]&gt;&lt;style&gt;sup { font-size: 100% !important; }&lt;/style&gt;&lt;![endif]--&gt;   &lt;!--[if gte mso 9]&gt; &lt;xml&gt;     &lt;o:OfficeDocumentSettings&gt;     &lt;o:AllowPNG&gt;&lt;/o:AllowPNG&gt;     &lt;o:PixelsPerInch&gt;96&lt;/o:PixelsPerInch&gt;     &lt;/o:OfficeDocumentSettings&gt; &lt;/xml&gt; &lt;![endif]--&gt;   &lt;!--[if !mso]&gt;&lt;!-- --&gt;   &lt;link href=""https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i"" rel=""stylesheet""&gt;   &lt;!--&lt;![endif]--&gt;   &lt;style type=""text/css""&gt; #outlook a {     padding:0; } .ExternalClass {     width:100%; } .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {     line-height:100%; } .es-button {     mso-style-priority:100!important;     text-decoration:none!important; } a[x-apple-data-detectors] {     color:inherit!important;     text-decoration:none!important;     font-size:inherit!important;     font-family:inherit!important;     font-weight:inherit!important;     line-height:inherit!important; } .es-desk-hidden {     display:none;     float:left;     overflow:hidden;     width:0;     max-height:0;     line-height:0;     mso-hide:all; } @media only screen and (max-width:600px) {p, ul li, ol li, a { font-size:14px!important; line-height:150%!important } h1 { font-size:22px!important; text-align:center; line-height:120%!important } h2 { font-size:20px!important; text-align:center; line-height:120%!important } h3 { font-size:18px!important; text-align:center; line-height:120%!important } h1 a { font-size:22px!important } h2 a { font-size:20px!important } h3 a { font-size:18px!important } .es-menu td a { font-size:13px!important } .es-header-body p, .es-header-body ul li, .es-header-body ol li, .es-header-body a { font-size:13px!important } .es-footer-body p, .es-footer-body ul li, .es-footer-body ol li, .es-footer-body a { font-size:13px!important } .es-infoblock p, .es-infoblock ul li, .es-infoblock ol li, .es-infoblock a { font-size:11px!important } *[class=""gmail-fix""] { display:none!important } .es-m-txt-c, .es-m-txt-c h1, .es-m-txt-c h2, .es-m-txt-c h3 { text-align:center!important } .es-m-txt-r, .es-m-txt-r h1, .es-m-txt-r h2, .es-m-txt-r h3 { text-align:right!important } .es-m-txt-l, .es-m-txt-l h1, .es-m-txt-l h2, .es-m-txt-l h3 { text-align:left!important } .es-m-txt-r img, .es-m-txt-c img, .es-m-txt-l img { display:inline!important } .es-button-border { display:block!important } .es-btn-fw { border-width:10px 0px!important; text-align:center!important } .es-adaptive table, .es-btn-fw, .es-btn-fw-brdr, .es-left, .es-right { width:100%!important } .es-content table, .es-header table, .es-footer table, .es-content, .es-footer, .es-header { width:100%!important; max-width:600px!important } .es-adapt-td { display:block!important; width:100%!important } .adapt-img { width:100%!important; height:auto!important } .es-m-p0 { padding:0px!important } .es-m-p0r { padding-right:0px!important } .es-m-p0l { padding-left:0px!important } .es-m-p0t { padding-top:0px!important } .es-m-p0b { padding-bottom:0!important } .es-m-p20b { padding-bottom:20px!important } .es-mobile-hidden, .es-hidden { display:none!important } tr.es-desk-hidden, td.es-desk-hidden, table.es-desk-hidden { width:auto!important; overflow:visible!important; float:none!important; max-height:inherit!important; line-height:inherit!important } tr.es-desk-hidden { display:table-row!important } table.es-desk-hidden { display:table!important } td.es-desk-menu-hidden { display:table-cell!important } .es-menu td { width:1%!important } table.es-table-not-adapt, .esd-block-html table { width:auto!important } table.es-social { display:inline-block!important } table.es-social td { display:inline-block!important } a.es-button, button.es-button { font-size:14px!important; display:block!important; border-left-width:0px!important; border-right-width:0px!important } } &lt;/style&gt;  &lt;/head&gt;  &lt;body style=""width:100%;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0""&gt;   &lt;div class=""es-wrapper-color"" style=""background-color:#EFEFEF""&gt;    &lt;!--[if gte mso 9]&gt;             &lt;v:background xmlns:v=""urn:schemas-microsoft-com:vml"" fill=""t""&gt;                 &lt;v:fill type=""tile"" color=""#efefef""&gt;&lt;/v:fill&gt;             &lt;/v:background&gt;         &lt;![endif]--&gt;    &lt;table class=""es-wrapper"" width=""100%"" cellspacing=""0"" cellpadding=""0"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top""&gt;      &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;       &lt;td valign=""top"" style=""padding:0;Margin:0""&gt; &lt;table class=""es-content es-visible-simple-html-only"" cellspacing=""0"" cellpadding=""0"" align=""center"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%""&gt;          &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;           &lt;td align=""center"" style=""padding:0;Margin:0;background-image:url(https://i.postimg.cc/NM3gbXWT/92761567150995235.png);background-position:center top;background-repeat:no-repeat"" background=""https://i.postimg.cc/NM3gbXWT/92761567150995235.png""&gt;            &lt;table class=""es-content-body"" cellspacing=""0"" cellpadding=""0"" bgcolor=""transparent"" align=""center"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px""&gt;              &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;               &lt;td align=""left"" style=""padding:0;Margin:0;padding-top:20px;padding-right:20px;padding-left:25px""&gt;                &lt;!--[if mso]&gt;&lt;table style=""width:555px"" cellpadding=""0"" cellspacing=""0""&gt;&lt;tr&gt;&lt;td style=""width:505px"" valign=""top""&gt;&lt;![endif]--&gt;                &lt;table cellspacing=""0"" cellpadding=""0"" align=""left"" class=""es-left"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left""&gt;                  &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                   &lt;td class=""es-m-p20b"" valign=""top"" align=""center"" style=""padding:0;Margin:0;width:505px""&gt;                    &lt;table width=""100%"" cellspacing=""0"" cellpadding=""0"" bgcolor=""transparent"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent"" role=""presentation""&gt;                      &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                       &lt;td align=""center"" height=""24"" style=""padding:0;Margin:0""&gt;&lt;/td&gt;                      &lt;/tr&gt;                      &lt;tr style=""border-collapse:collapse""&gt;                       &lt;td bgcolor=""transparent"" align=""left"" style=""padding:0;Margin:0;padding-left:5px;padding-right:5px;padding-top:35px""&gt;&lt;h2 style=""Margin:0;line-height:19px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:16px;font-style:normal;font-weight:bold;color:#333333""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;Buen día,&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/h2&gt;&lt;/td&gt;                      &lt;/tr&gt;                      &lt;tr style=""border-collapse:collapse""&gt;                       &lt;td bgcolor=""transparent"" align=""left"" style=""Margin:0;padding-bottom:5px;padding-left:0px;padding-right:15px;padding-top:30px""&gt;&lt;h3 style=""Margin:0;line-height:17px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:14px;font-style:normal;font-weight:bold;color:#666666""&gt; &lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt; &lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt; &lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;"+out_strObservaciones+"&amp;nbsp;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/h3&gt;&lt;br&gt;&lt;/td&gt;                      &lt;/tr&gt;                      &lt;tr style=""border-collapse:collapse""&gt;                       &lt;td bgcolor=""transparent"" align=""left"" style=""padding:0;Margin:0;padding-top:15px;padding-bottom:15px""&gt;&lt;p style=""Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#333333""&gt;&lt;b&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;Que tengas buen día.&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;&lt;/td&gt;                      &lt;/tr&gt;                    &lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;                  &lt;/tr&gt;                &lt;/tbody&gt;&lt;/table&gt;                &lt;!--[if mso]&gt;&lt;/td&gt;&lt;td style=""width:20px""&gt;&lt;/td&gt;&lt;td style=""width:30px"" valign=""top""&gt;&lt;![endif]--&gt;                &lt;table cellpadding=""0"" cellspacing=""0"" class=""es-right"" align=""right"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right""&gt;                  &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                   &lt;td align=""left"" style=""padding:0;Margin:0;width:30px""&gt;                    &lt;table cellpadding=""0"" cellspacing=""0"" width=""100%"" role=""presentation"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px""&gt;                      &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                      &lt;/tr&gt;                    &lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;                  &lt;/tr&gt;                &lt;/tbody&gt;&lt;/table&gt;                &lt;!--[if mso]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;&lt;/td&gt;              &lt;/tr&gt;              &lt;tr style=""border-collapse:collapse""&gt;               &lt;td align=""left"" style=""Margin:0;padding-top:20px;padding-left:15px;padding-right:15px;padding-bottom:40px""&gt;                &lt;!--[if mso]&gt;&lt;table style=""width:560px"" cellpadding=""0"" cellspacing=""0""&gt;&lt;tr&gt;&lt;td style=""width:108px"" valign=""top""&gt;&lt;![endif]--&gt;                &lt;table cellpadding=""0"" cellspacing=""0"" class=""es-left"" align=""left"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left""&gt;                  &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                   &lt;td class=""es-m-p0r es-m-p20b"" valign=""top"" align=""center"" style=""padding:0;Margin:0;width:108px""&gt;                    &lt;table cellpadding=""0"" cellspacing=""0"" width=""100%"" role=""presentation"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px""&gt;                      &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                       &lt;td align=""center"" style=""padding:0;Margin:0;font-size:0px""&gt;&lt;img class=""adapt-img"" src=""https://i.postimg.cc/PfQcSYsj/65811610664999244.png"" alt="""" style=""display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"" width=""75""&gt;&lt;/td&gt;                      &lt;/tr&gt;                    &lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;                  &lt;/tr&gt;                &lt;/tbody&gt;&lt;/table&gt;                &lt;!--[if mso]&gt;&lt;/td&gt;&lt;td style=""width:0px""&gt;&lt;/td&gt;&lt;td style=""width:452px"" valign=""top""&gt;&lt;![endif]--&gt;                &lt;table cellpadding=""0"" cellspacing=""0"" align=""right"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px""&gt;                  &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                   &lt;td align=""left"" style=""padding:0;Margin:0;width:452px""&gt;                    &lt;table cellpadding=""0"" cellspacing=""0"" width=""100%"" role=""presentation"" style=""mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px""&gt;                      &lt;tbody&gt;&lt;tr style=""border-collapse:collapse""&gt;                       &lt;td align=""left"" style=""padding:0;Margin:0""&gt;&lt;p style=""Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#333333""&gt;&lt;strong&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;Compañero digital&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/strong&gt;&lt;br&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;Conciliación Logística Inversa Drive &lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;&lt;font style=""vertical-align:inherit""&gt;"+now.Date.ToString("dd/MM/yyyy")+"&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/p&gt;&lt;/td&gt;                      &lt;/tr&gt;                    &lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;                  &lt;/tr&gt;                &lt;/tbody&gt;&lt;/table&gt;                &lt;!--[if mso]&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;![endif]--&gt;&lt;/td&gt;              &lt;/tr&gt;            &lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;          &lt;/tr&gt;        &lt;/tbody&gt;&lt;/table&gt;&lt;/td&gt;      &lt;/tr&gt;    &lt;/tbody&gt;&lt;/table&gt;   &lt;/div&gt; &lt;/body&gt;&lt;/html&gt;"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Asignar" sap:VirtualizedContainerService.HintSize="647,60" sap2010:WorkflowViewState.IdRef="Assign_25">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[out_DtbEmailConfig.Rows(0).Item("Body")]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[vStrBodyHtml]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;No se deben enviar Correos&quot;]" />
+          </If.Else>
+        </If>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

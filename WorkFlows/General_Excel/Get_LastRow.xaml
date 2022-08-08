@@ -1,0 +1,159 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Borrar_sheet" this:Borrar_sheet.in_ExcelPath="D:\LogisticaMateriales\Ejecuciones\20210503\Plantilla BOT LD MAT.xlsm" this:Borrar_sheet.in_Sheet="DIN_CONS" this:Borrar_sheet.in_Column="A" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_ExcelPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_Sheet" Type="InArgument(x:String)" />
+    <x:Property Name="in_Column" Type="InArgument(x:String)" />
+    <x:Property Name="in_Confg" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="out_LastRow" Type="OutArgument(x:Int32)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1608,1399</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Borrar_sheet_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="46">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>Microsoft.Office.Interop.Excel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="56">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>Microsoft.Office.Interop.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Busca la última fila en una collumna de excel con valor&#xA;&#xA;&#xA;&#xA;Entrada&#xA;&#xA;in_ExcelPath: Ruta del excel&#xA;in_Sheet: nombre del la Hoja&#xA;in_Column: Columna en la hoja Ejemplo &quot;A&quot;&#xA;&#xA;Salida: número de la última fila llena  Ejemplo &quot;500&quot;&#xA;&#xA;&#xA;" DisplayName="Get_ LastRow" sap:VirtualizedContainerService.HintSize="839,1334" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="vstrExcelPath" />
+      <Variable x:TypeArguments="x:String" Name="vstrNameSheet" />
+      <Variable x:TypeArguments="x:Boolean" Name="Success" />
+      <Variable x:TypeArguments="x:String" Name="Message" />
+      <Variable x:TypeArguments="x:Int32" Name="vstrLastow" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="797,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[ Get_Last Row ]&quot; + in_ExcelPath +&quot; - &quot;+ in_Sheet + &quot; - &quot;+ in_Column]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim myExcelApp As Microsoft.Office.Interop.Excel.Application&#xD;&#xA;Dim myWorkbook As Microsoft.Office.Interop.Excel.Workbook&#xD;&#xA;Dim myWorksheet As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;&#xD;&#xA;'Para control de errores&#xD;&#xA;Success = True&#xD;&#xA;Message = &quot;Recupera ok lastrow &quot;&#xD;&#xA;&#xD;&#xA;console.WriteLine( &quot;Inicia Recuperar last row &quot; )&#x9;&#xD;&#xA;Try &#xD;&#xA;&#x9;&#x9;myExcelApp = New Microsoft.Office.Interop.Excel.Application&#xD;&#xA;&#x9;&#x9;myWorkbook=myExcelApp.Workbooks.Open(in_ExcelPath)&#xD;&#xA;&#x9;&#x9;myWorksheet=DirectCast(myWorkbook.Sheets(in_Sheet),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;&#x9;&#x9; LastRow = myWorksheet.Range(in_Columnn &amp; myWorksheet.Rows.Count).End(Microsoft.Office.Interop.Excel.XlDirection.xlUp).Row&#xD;&#xA;&#x9;&#x9;'console.WriteLine( &quot;Ultima Fila  *************&quot; +LastRow.ToString)&#x9;&#xD;&#xA;&#x9;&#x9;myExcelApp.DisplayAlerts=False&#xD;&#xA;&#x9;&#x9;' console.WriteLine( &quot;antes del alert*************&quot;)&#x9;&#xD;&#xA;myExcelApp.DisplayAlerts=True&#xD;&#xA;myExcelApp.Visible= True&#xD;&#xA;'  console.WriteLine( &quot;antes del save*************&quot;)&#x9;&#xD;&#xA;myWorkbook.Save()&#xD;&#xA;myWorkbook.Close()&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;Catch ex As Exception&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;Success = False&#xD;&#xA;&#x9;&#x9;&#x9;Message = &quot;Se presenta  excepción de sistema el motivo :  &quot;+ex.Message&#xD;&#xA;&#x9;&#x9;  console.WriteLine( &quot;testy*************&quot; +Message )&#x9;&#xD;&#xA;&#x9;&#x9;  &#xD;&#xA;End Try&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="797,164" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ExcelPath">[in_ExcelPath]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Sheet">[in_Sheet]</InArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="Success">[Success]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="Message">[Message]</OutArgument>
+        <OutArgument x:TypeArguments="x:Int32" x:Key="LastRow">[out_LastRow]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Columnn">[in_Column]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <If Condition="[Success]" sap:VirtualizedContainerService.HintSize="797,685" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Get_lastRow &quot; + out_LastRow.ToString]" />
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="SE-NN" sap:VirtualizedContainerService.HintSize="418,537" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="376,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Excepción y enviar a throw &quot; +Message]" />
+          <Sequence DisplayName="Sequence SE-NN" sap:VirtualizedContainerService.HintSize="376,314" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="s:SystemException" Name="SystemException" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MultipleAssign DisplayName="Multiple Assign SE-NN" sap:VirtualizedContainerService.HintSize="334,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="s:SystemException">[SystemException]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="s:SystemException">[new SystemException(Message)]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:Object">[SystemException.Data("ObservacionBD")]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:Object">["Error: " + Message]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:Object">[SystemException.Data("Codigo")]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:Object">["SE-NN"]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <Throw DisplayName="Throw SE-NN" Exception="[SystemException]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+          </Sequence>
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
