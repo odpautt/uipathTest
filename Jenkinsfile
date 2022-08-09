@@ -4,19 +4,36 @@ pipeline {
 
 	        // Environment Variables
 	        environment {
-	        nodo_RPA = "netfvm-psonar02"
+			
+			  nodo_RPA = "netfvm-psonar02"
+			  //se indica la url del repositorio
+			  git_url = "http://10.100.82.76:9003/Indra-T1/RPA/UiPath/Logistica_Inversa_Conciliacion.git"
+
+			  // el branch indicado puede ser (Desarrollo,Test,preproduccion,master)
+			  branch = "master"
+
+			  //se indican las credenciales establecidas para el acceso a git 
+			  credentialsId = "4d840691-7eae-442e-bb14-ad657a348dfd"
 	        
-	        MAJOR = '1'
-	        MINOR = '0'
-	        //Orchestrator Services
-	        UIPATH_ORCH_URL = "https://netvm-prpa34.epmtelco.com.co/"
-			UIPATH_ORCH_LOGICAL_NAME = ""
-			UIPATH_ORCH_TENANT_NAME = "Production"
-			UIPATH_ORCH_FOLDER_NAME = "INDRA"
-	    }
+				MAJOR = '1'
+				MINOR = '0'
+				//Orchestrator Services
+				UIPATH_ORCH_URL = "https://netvm-prpa34.epmtelco.com.co/"
+				UIPATH_ORCH_LOGICAL_NAME = ""
+				UIPATH_ORCH_TENANT_NAME = "Production"
+				UIPATH_ORCH_FOLDER_NAME = "INDRA"
+			}
 	
 
 	    stages {
+		
+		stage('Version_Control') {
+				steps {
+					node("${env.nodo_RPA}") {
+					git url: "${env.git_url}", branch: "${env.branch}", credentialsId: "${env.credentialsId}"
+				}
+		   }
+		}
 	        
 
 	        // Printing Basic Information
@@ -97,7 +114,6 @@ pipeline {
 	
 
 	
-   
 
 	   // // 
 	   // post {
