@@ -29,9 +29,9 @@ pipeline {
 		
 		stage('Version_Control') {
 				steps {
-					node("${env.nodo_RPA}") {
+					//node("${env.nodo_RPA}") {
 					git url: "${env.git_url}", branch: "${env.branch}", credentialsId: "${env.credentialsId}"
-				}
+				//}
 		   }
 		}
 	        
