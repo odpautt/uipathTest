@@ -5,7 +5,7 @@ pipeline {
 	        // Environment Variables
 	        environment {
 			
-			  nodo_RPA = "netfvm-psonar02"
+			  //nodo_RPA = "netfvm-psonar02"
 			  //se indica la url del repositorio
 			  git_url = "http://10.100.82.76:9003/Indra-T1/RPA/UiPath/Logistica_Inversa_Conciliacion.git"
 
@@ -39,13 +39,13 @@ pipeline {
 	        // Printing Basic Information
 	        stage('Preparing'){
 	            steps {
-	                node("${env.nodo_RPA}"){
+	                
     	                echo "Jenkins Home ${env.JENKINS_HOME}"
     	                echo "Jenkins URL ${env.JENKINS_URL}"
     	                echo "Jenkins JOB Number ${env.BUILD_NUMBER}"
     	                echo "Jenkins JOB Name ${env.JOB_NAME}"
     	                echo "GitHub BranhName ${env.BRANCH_NAME}"
-    	            }//checkout scm
+    	            
 	            }
 	        }
 	
@@ -53,7 +53,7 @@ pipeline {
 	         // Build Stages
 	        stage('Build') {
 	            steps {
-	                node("${env.nodo_RPA}"){
+	                
     	                echo "Building..with ${WORKSPACE}"
     	                UiPathPack (
     	                      outputPath: "Output\\${env.BUILD_NUMBER}",
@@ -62,7 +62,7 @@ pipeline {
     	                      //useOrchestrator: true,
     						  //traceLevel: 'None')
     				                )
-	                }
+	                
 	            }
 	        }
 	         // Test Stages
@@ -76,7 +76,7 @@ pipeline {
 	         // Deploy Stages
 	        stage('Deploy to UAT') {
 	            steps {
-	                node("${env.nodo_RPA}"){
+	                
     	                echo "Deploying ${BRANCH_NAME} to UAT "
     	                UiPathDeploy (
     	                packagePath: "Output\\${env.BUILD_NUMBER}",
@@ -89,7 +89,7 @@ pipeline {
     					traceLevel: 'None',
     					entryPointPaths: 'Main.xaml'
     					)
-	                }	
+	                	
 	            }
 	        }
 	
