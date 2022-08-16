@@ -7,13 +7,13 @@ pipeline {
 			
 			  //nodo_RPA = "netfvm-psonar02"
 			  //se indica la url del repositorio
-			  git_url = "http://10.100.82.76:9003/Indra-T1/RPA/UiPath/Logistica_Inversa_Conciliacion.git"
+			  git_url = "https://github.com/odpautt/uipathTest.git"
 
 			  // el branch indicado puede ser (Desarrollo,Test,preproduccion,master)
-			  branch = "master"
+			  branch = "test"
 
 			  //se indican las credenciales establecidas para el acceso a git 
-			  credentialsId = "a8f8a848-519e-412e-b3a8-e34cdca1cb8c"
+			  credentialsId = "95422137"
 	        
 				MAJOR = '1'
 				MINOR = '0'
