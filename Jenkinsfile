@@ -13,7 +13,7 @@ pipeline {
 			  branch = "master"
 
 			  //se indican las credenciales establecidas para el acceso a git 
-			  credentialsId = "4d840691-7eae-442e-bb14-ad657a348dfd"
+			  credentialsId = "a8f8a848-519e-412e-b3a8-e34cdca1cb8c"
 	        
 				MAJOR = '1'
 				MINOR = '0'
