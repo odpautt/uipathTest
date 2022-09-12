@@ -5,15 +5,15 @@ pipeline {
 	        // Environment Variables
 	        environment {
 			
-			  nodo_RPA = "netfvm-psonar02"
+			  //nodo_RPA = "netfvm-psonar02"
 			  //se indica la url del repositorio
-			  git_url = "http://10.100.82.76:9003/Indra-T1/RPA/UiPath/Logistica_Inversa_Conciliacion.git"
+			  git_url = "https://github.com/odpautt/uipathTest.git"
 
 			  // el branch indicado puede ser (Desarrollo,Test,preproduccion,master)
-			  branch = "master"
+			  branch = "test"
 
 			  //se indican las credenciales establecidas para el acceso a git 
-			  credentialsId = "4d840691-7eae-442e-bb14-ad657a348dfd"
+			  credentialsId = "95422137"
 	        
 				MAJOR = '1'
 				MINOR = '0'
@@ -27,25 +27,25 @@ pipeline {
 
 	    stages {
 		
-		stage('Version_Control') {
-				steps {
-					node("${env.nodo_RPA}") {
-					git url: "${env.git_url}", branch: "${env.branch}", credentialsId: "${env.credentialsId}"
-				}
-		   }
-		}
+		//stage('Version_Control') {
+		//		steps {
+		//			//node("${env.nodo_RPA}") {
+		//			git url: "${env.git_url}", branch: "${env.branch}", credentialsId: "${env.credentialsId}"
+		//		//}
+		//   }
+		//}
 	        
 
 	        // Printing Basic Information
 	        stage('Preparing'){
 	            steps {
-	                node("${env.nodo_RPA}"){
+	                
     	                echo "Jenkins Home ${env.JENKINS_HOME}"
     	                echo "Jenkins URL ${env.JENKINS_URL}"
     	                echo "Jenkins JOB Number ${env.BUILD_NUMBER}"
     	                echo "Jenkins JOB Name ${env.JOB_NAME}"
     	                echo "GitHub BranhName ${env.BRANCH_NAME}"
-    	            }//checkout scm
+    	            
 	            }
 	        }
 	
@@ -53,16 +53,16 @@ pipeline {
 	         // Build Stages
 	        stage('Build') {
 	            steps {
-	                node("${env.nodo_RPA}"){
+	                
     	                echo "Building..with ${WORKSPACE}"
     	                UiPathPack (
     	                      outputPath: "Output\\${env.BUILD_NUMBER}",
     	                      projectJsonPath: "project.json",
     	                      version:[$class: 'ManualVersionEntry', version: "${MAJOR}.${MINOR}.${env.BUILD_NUMBER}"],
-    	                      //useOrchestrator: true,
-    						  //traceLevel: 'None')
+    	                      useOrchestrator: false,
+    						  traceLevel: "None"
     				                )
-	                }
+	                
 	            }
 	        }
 	         // Test Stages
@@ -76,7 +76,7 @@ pipeline {
 	         // Deploy Stages
 	        stage('Deploy to UAT') {
 	            steps {
-	                node("${env.nodo_RPA}"){
+	                
     	                echo "Deploying ${BRANCH_NAME} to UAT "
     	                UiPathDeploy (
     	                packagePath: "Output\\${env.BUILD_NUMBER}",
@@ -86,10 +86,10 @@ pipeline {
     	                environments: 'DEV',
     	                credentials: [$class: 'UserPassAuthenticationEntry', credentialsId: 'APIUserKey1'],
 						//credentials: Token(accountName: "${UIPATH_ORCH_LOGICAL_NAME}", credentialsId: 'APIUserKey'), 
-    					traceLevel: 'None',
+    					traceLevel: "None",
     					entryPointPaths: 'Main.xaml'
     					)
-	                }	
+	                	
 	            }
 	        }
 	
